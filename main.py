@@ -14,18 +14,18 @@ def user_numbers():
     while tries != 6:
         try:
             number = int(input('Give your number: '))
-            if numbers.count(number) == 0:
-                numbers.append(number)
-                tries += 1
+            if number in range(1, 50):
+                if number not in numbers:
+                    numbers.append(number)
+                    tries += 1
+                else:
+                    print(f'You picked {number} before. Choose another one!')
             else:
-                print(f"You picked {number} before. Choose another one!")
-            if number not in range(1, 50):
                 print("You can choose only between 1-49.")
-                del numbers[-1]
-                tries -= 1
-            numbers.sort()
         except ValueError:
             print("Only numbers!")
+        numbers.sort()
+
     return numbers
 
 
@@ -41,21 +41,21 @@ def lottery():
     i = 0
     while i < 6:
         pick = randint(1, 50)
-        if drawing_list.count(pick) == 0:
+        if pick not in drawing_list:
             drawing_list.append(pick)
             i += 1
         drawing_list.sort()
     return drawing_list
 
 
-def print_function(list):
+def print_function(picks):
     """Format list of numbers
 
     Make list of integers into string
 
     :rtype str
     """
-    return ", ".join(str(value) for value in list)
+    return ", ".join(str(value) for value in picks)
 
 
 def results():
